@@ -1,0 +1,27 @@
+{% extends "blog/default.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{ post.topic }}</h3>
+    <div class="postinfo">
+      <div class="pull-right">{{ post.published }} - {{ post.author }}</div>
+    </div>
+  </div>
+  <div class="panel-body">
+    {% autoescape off %}
+    {{ post.content }}
+    {% endautoescape %}
+  </div>
+</div>
+{% endblock %}
+{% block footer %}
+<nav>
+  <ul class="pagination">
+    <li>
+        <a class="btn" href="{{ request.META.HTTP_REFERER }}">{% trans "Back" %}</a>
+    </li>
+  </ul>
+</nav>
+{% endblock %}
