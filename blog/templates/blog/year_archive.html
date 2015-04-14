@@ -1,6 +1,20 @@
 {% extends "blog/index.html" %}
 {% load i18n %}
 
+{% block subnavigation %}
+<ul class="nav nav-pills">
+  <li role="presentation" class="pull-left">
+      <a href="{% url 'year_archive' year=selected|date:'Y'|add:'-1' %}" aria-label="Previous year">
+          <span aria-hidden="true">&laquo;</span> {{ selected|date:'Y'|add:'-1' }}
+      </a>
+  </li>
+  <li role="presentation" class="pull-right">
+      <a href="{% url 'year_archive' year=selected|date:'Y'|add:'1' %}" aria-label="Next year">
+          {{ selected|date:'Y'|add:'1' }} <span aria-hidden="true">&raquo;</span>
+      </a>
+  </li>
+</ul>
+{% endblock %}
 {% block footer %}
 <nav>
   <ul class="pagination">
@@ -12,8 +26,12 @@
     </li>
     {% endif %}
     {% for page in page_count %}
-    <li {% if current_page == page|add:'1' %} class='active' {% endif %}>
-      <a href="{% url 'year_archive' year=selected|date:'Y' page=page|add:'1' %}">{{ page|add:'1' }}</a>
+    {% if current_page == page|add:'1' %}
+    <li  class='active'>
+    {% else %}
+    <li>
+    {% endif %}
+      <a href="{% url 'month_archive' year=selected|date:'Y' month=selected|date:'m' page=page|add:'1' %}">{{ page|add:'1' }}</a>
     </li>
     {% endfor %}
     {% if current_page < page_count|length %}

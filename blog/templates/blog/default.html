@@ -46,6 +46,8 @@
       </nav>
       {% endblock %}
       <div class="container" id="content">
+          {% block subnavigation %}
+          {% endblock %}
           {% block content %}
           {% endblock %}
       </div>

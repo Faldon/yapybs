@@ -13,7 +13,7 @@
       </div>
       <div class="panel-body">
         {% autoescape off %}
-        {{ post.content|truncatechars:125|removetags:'div' }}
+        {{ post.content|truncatechars_html:125 }}
         {% endautoescape %}
         {% if post.content|length > 125 %}
         <p></p>
@@ -25,7 +25,7 @@
 {% else %}
     <div class="alert alert-warning" role="alert">
     {% blocktrans %}
-        Way too empty here. Better get your first post ready in-time.
+        No blog posts available.
     {% endblocktrans %}
     </div>
 {% endif %}

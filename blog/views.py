@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import BlogPost
+from .forms import DatepickerForm
 import datetime
 
 
@@ -79,9 +80,24 @@ def day_archive(request, year, month, day):
     :param day: Day to view
     :return: HTTP Response
     """
-    selected_posts = BlogPost.objects.filter(published=datetime.date(int(year), int(month), int(day)))
+    if request.method == 'POST':
+        form = DatepickerForm(request.POST)
+        if form.is_valid():
+            date_selected = form.cleaned_data['dateselector']
+            return redirect('day_archive', year=date_selected.year, month=date_selected.month, day=date_selected.day)
+    else:
+        form = DatepickerForm()
+        selected_posts = BlogPost.objects.filter(
+            published__gte=datetime.date(int(year), int(month), int(day))).exclude(
+                published__gte=datetime.date(int(year), int(month), int(day)+1)
+            )
 
-    return render(request, 'blog/day_archive.html', dict(selected_posts=selected_posts, current_date=datetime.date.today()))
+        return render(request, 'blog/day_archive.html', dict(
+            selected_posts=selected_posts,
+            current_date=datetime.date.today(),
+            selected=datetime.date(int(year), int(month), int(day)),
+            form=form)
+        )
 
 
 def detail(request, post_id):

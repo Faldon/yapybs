@@ -1,6 +1,36 @@
 {% extends "blog/index.html" %}
 {% load i18n %}
 
+{% block subnavigation %}
+<ul class="nav nav-pills">
+  <li role="presentation" class="pull-left">
+      {% if selected|date:'n' = '1' %}
+      <a href="{% url 'month_archive' year=selected|date:'Y'|add:'-1' month=12 %}" aria-label="Previous month">
+          <span aria-hidden="true">&laquo;</span>
+           12 / {{ selected|date:'Y'|add:'-1' }}
+      </a>
+      {% else %}
+      <a href="{% url 'month_archive' year=selected|date:'Y' month=selected|date:'m'|add:'-1' %}" aria-label="Previous month">
+          <span aria-hidden="true">&laquo;</span>
+           {{ selected|date:'n'|add:'-1'|stringformat:'02d' }} / {{ selected|date:'Y' }}
+      </a>
+      {% endif %}
+  </li>
+  <li role="presentation" class="pull-right">
+      {% if selected|date:'n' = '12' %}
+      <a href="{% url 'month_archive' year=selected|date:'Y'|add:'1' month=1 %}" aria-label="Next month">
+          <span aria-hidden="true">&laquo;</span>
+           01 / {{ selected|date:'Y'|add:'1' }}
+      </a>
+      {% else %}
+      <a href="{% url 'month_archive' year=selected|date:'Y' month=selected|date:'m'|add:'1' %}" aria-label="Next month">
+          {{ selected|date:'n'|add:'1'|stringformat:'02d' }} / {{ selected|date:'Y' }}
+           <span aria-hidden="true">&raquo;</span>
+      </a>
+      {% endif %}
+  </li>
+</ul>
+{% endblock %}
 {% block footer %}
 <nav>
   <ul class="pagination">
@@ -12,7 +42,11 @@
     </li>
     {% endif %}
     {% for page in page_count %}
-    <li {% if current_page == page|add:'1' %} class='active' {% endif %}>
+    {% if current_page == page|add:'1' %}
+    <li  class='active'>
+    {% else %}
+    <li>
+    {% endif %}
       <a href="{% url 'month_archive' year=selected|date:'Y' month=selected|date:'m' page=page|add:'1' %}">{{ page|add:'1' }}</a>
     </li>
     {% endfor %}
