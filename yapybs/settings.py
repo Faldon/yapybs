@@ -52,7 +52,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'thesecretgamer.urls'
+ROOT_URLCONF = 'yapybs.urls'
 
 TEMPLATES = [
     {
@@ -70,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'thesecretgamer.wsgi.application'
+WSGI_APPLICATION = 'yapybs.wsgi.application'
 
 
 # Database

@@ -1,0 +1,28 @@
+{% extends "blog/index.html" %}
+{% load i18n %}
+
+{% block footer %}
+<nav>
+  <ul class="pagination">
+    {% if current_page > 1 %}
+    <li>
+      <a href="{% url 'year_archive' year=selected|date:'Y' page=current_page|add:'-1' %}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% endif %}
+    {% for page in page_count %}
+    <li {% if current_page == page|add:'1' %} class='active' {% endif %}>
+      <a href="{% url 'year_archive' year=selected|date:'Y' page=page|add:'1' %}">{{ page|add:'1' }}</a>
+    </li>
+    {% endfor %}
+    {% if current_page < page_count|length %}
+    <li>
+      <a href="{% url 'year_archive' year=selected|date:'Y' page=current_page|add:'1' %}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endblock %}
