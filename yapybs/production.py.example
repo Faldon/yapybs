@@ -7,10 +7,9 @@ SECRET_KEY = '' #IMPORTANT: Provide a unique secret key and keep it secret in pr
 
 DEBUG = False
 
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = False #Set to true when serving via https
+CSRF_COOKIE_SECURE = False #Set to true when serving via https
 CSRF_COOKIE_HTTPONLY = True
-X_FRAME_OPTIONS = 'DENY'
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
 
