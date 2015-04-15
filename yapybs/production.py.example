@@ -1,0 +1,40 @@
+try:
+    from settings import *
+except ImportError as e:
+    exit()
+
+SECRET_KEY = '' #IMPORTANT: Provide a unique secret key and keep it secret in production
+
+DEBUG = False
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+
+ALLOWED_HOSTS = [''] #Enter name of your site here, e.g. www.example.com
+
+STATIC_ROOT = "" #Enter path to your static root folder, e.g. /var/www/html/www.example.com/static
+
+DATABASES = {
+        'default': {
+            'ENGINE': '', #Enter engine of your preferred database. Don't forget to install a database connector
+            'NAME': '', #Enter database name
+            'USER': '', #Enter database user
+            'PASSWORD': '', #Enter password
+            'HOST': '', #Enter database host
+            'PORT': '', #Enter port
+        }
+    }
+
+### Adjust cache and session engine to your needs
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_cache',
+    }
+}
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
