@@ -10,7 +10,8 @@ https://docs.djangoproject.com/en/1.8/howto/deployment/wsgi/
 import os
 import sys
 
-sys.path.append('/home/thopu/PycharmProjects/yapybs')
+### Set this in production environment
+#sys.path.append('')
 
 from django.core.wsgi import get_wsgi_application
 
