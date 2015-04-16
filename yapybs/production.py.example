@@ -37,3 +37,5 @@ CACHES = {
 }
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+
+BRAND_TEXT = "" #Set a brand text which is displayed in the navigation bar
