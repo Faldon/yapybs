@@ -43,7 +43,7 @@
     <li class='active'>
     {% else %}
     <li>
-    {% endif %}>
+    {% endif %}
       <a href="{% url 'index' page=page|add:'1' %}">{{ page|add:'1' }}</a>
     </li>
     {% endfor %}
