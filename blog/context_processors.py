@@ -8,7 +8,13 @@ def current_date(request):
     }
 
 
-def brand_text(self):
+def brand_text(request):
     return {
         'brand_text' : getattr(settings, "BRAND_TEXT", "")
+    }
+
+
+def site_title(request):
+    return {
+        'brand_text' : getattr(settings, "SITE_TITLE", "")
     }

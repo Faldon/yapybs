@@ -20,7 +20,7 @@
       <div class="panel-heading">
         <h3 class="panel-title">{{ post.topic }}</h3>
         <div class="postinfo">
-          <div class="pull-right">{{ post.published }} - {{ post.author }}</div>
+          <div class="pull-right">{{ post.published|date:'SHORT_DATE_FORMAT' }} - {{ post.author }}</div>
         </div>
       </div>
       <div class="panel-body">
@@ -36,9 +36,7 @@
     {% endfor %}
 {% else %}
     <div class="alert alert-warning" role="alert">
-    {% blocktrans %}
-        No posts available for selected day.
-    {% endblocktrans %}
+    {% blocktrans %}No posts available for selected day.{% endblocktrans %}
     </div>
 {% endif %}
 {% endblock %}

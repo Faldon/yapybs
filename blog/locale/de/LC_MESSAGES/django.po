@@ -1,0 +1,58 @@
+# German language file for yapybs
+# Copyright (C) 2015 Thomas Pulzer
+# This file is distributed under the same license as the yapybs.blog package.
+# Thomas Pulzer <t.pulzer@thesecretgamer.de>, 2015.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-04-16 20:08+0200\n"
+"PO-Revision-Date: 2015-04-16 20:10+0200\n"
+"Last-Translator: Thomas Pulzer <t.pulzer@thesecretgamer.de>\n"
+"Language: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/blog/day_archive.html:9
+msgid "Pick a date:"
+msgstr "Datum auswählen:"
+
+#: templates/blog/day_archive.html:12 templates/blog/default.html:47
+msgid "Submit"
+msgstr "Absenden"
+
+#: templates/blog/day_archive.html:32 templates/blog/index.html:20
+msgid "Read more..."
+msgstr "Weiterlesen..."
+
+#: templates/blog/day_archive.html:39
+msgid "No posts available for selected day."
+msgstr "Für gewählten Tag sind keine Einträge verfügbar."
+
+#: templates/blog/default.html:30
+msgid "Toggle navigation"
+msgstr "Navigation umschalten"
+
+#: templates/blog/default.html:39
+msgid "Year archive"
+msgstr "Jahresarchiv"
+
+#: templates/blog/default.html:40
+msgid "Month archive"
+msgstr "Monatsarchiv"
+
+#: templates/blog/default.html:41
+msgid "Day archive"
+msgstr "Tagesarchiv"
+
+#: templates/blog/index.html:27
+msgid "No blog posts available."
+msgstr "Keine Einträge verfügbar."
+
+#: templates/blog/post.html:23
+msgid "Back"
+msgstr "Zurück"

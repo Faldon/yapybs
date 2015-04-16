@@ -8,7 +8,7 @@
       <div class="panel-heading">
         <h3 class="panel-title">{{ post.topic }}</h3>
         <div class="postinfo">
-          <div class="pull-right">{{ post.published }} - {{ post.author }}</div>
+          <div class="pull-right">{{ post.published|date:'SHORT_DATE_FORMAT' }} - {{ post.author }}</div>
         </div>
       </div>
       <div class="panel-body">
@@ -24,9 +24,7 @@
     {% endfor %}
 {% else %}
     <div class="alert alert-warning" role="alert">
-    {% blocktrans %}
-        No blog posts available.
-    {% endblocktrans %}
+    {% blocktrans %}No blog posts available.{% endblocktrans %}
     </div>
 {% endif %}
 {% endblock %}
@@ -41,7 +39,11 @@
     </li>
     {% endif %}
     {% for page in page_count %}
-    <li {% if current_page == page|add:'1' %} class='active' {% endif %}>
+    {% if current_page == page|add:'1' %}
+    <li class='active'>
+    {% else %}
+    <li>
+    {% endif %}>
       <a href="{% url 'index' page=page|add:'1' %}">{{ page|add:'1' }}</a>
     </li>
     {% endfor %}
