@@ -67,6 +67,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'blog.context_processors.current_date',
                 'blog.context_processors.brand_text',
+                'blog.context_processors.site_title',
             ],
         },
     },
