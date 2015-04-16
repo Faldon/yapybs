@@ -16,5 +16,5 @@ def brand_text(request):
 
 def site_title(request):
     return {
-        'brand_text': getattr(settings, "SITE_TITLE", "")
+        'site_title': getattr(settings, "SITE_TITLE", "")
     }
