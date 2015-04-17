@@ -1,0 +1,23 @@
+<VirtualHost *:80>
+        ServerAdmin admin@example.com #Enter the server admin's mail address
+        ServerName www.example.com #Enter the name of your site
+        DocumentRoot /var/www/html/www.example.com #Enter root of your static files according to your production settings
+
+        Alias /static/ /var/www/html/www.example.com/static #Enter path to your static files
+        <Directory /var/www/html/www.example.com/static>    #Adjust to your needs
+                Order allow,deny
+                Allow from all
+                #Require all granted
+        </Directory>
+
+        WSGIDaemonProcess yapybs threads=15 display-name=%{GROUP}
+        WSGIProcessGroup yapybs
+        WSGIScriptAlias / /your/production/directory/yapybs/wsgi.py #Enter path to wsgi.py in your production directory
+        <Directory /your/production/directory> #Enter path to your production directory
+        <Files wsgi.py>
+                Order allow,deny
+                Allow from all
+                #Require all granted
+        </Files>
+        </Directory>
+</VirtualHost>
