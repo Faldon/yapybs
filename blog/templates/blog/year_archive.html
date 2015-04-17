@@ -31,7 +31,7 @@
     {% else %}
     <li>
     {% endif %}
-      <a href="{% url 'year_archive' year=selected|date:'Y' month=selected|date:'m' page=page|add:'1' %}">{{ page|add:'1' }}</a>
+      <a href="{% url 'year_archive' year=selected|date:'Y' page=page|add:'1' %}">{{ page|add:'1' }}</a>
     </li>
     {% endfor %}
     {% if current_page < page_count|length %}
