@@ -10,7 +10,7 @@ def index(request, page=1):
     :param page: Page number to view
     :return: HTTP Response
     """
-    selected_posts = BlogPost.objects.order_by('published')[5*(int(page)-1):5*int(page)]
+    selected_posts = BlogPost.objects.order_by('-published')[5*(int(page)-1):5*int(page)]
     post_count = BlogPost.objects.count()
 
     return render(request, 'blog/index.html', dict(
@@ -30,7 +30,7 @@ def year_archive(request, year, page=1):
     selected_posts = BlogPost.objects.filter(
         published__gte=datetime.date(int(year), 1, 1)).exclude(
             published__gte=datetime.date(int(year)+1, 1, 1)
-        ).order_by('published')[5*(int(page)-1):5*int(page)]
+        ).order_by('-published')[5*(int(page)-1):5*int(page)]
     post_count = BlogPost.objects.filter(
         published__gte=datetime.date(int(year), 1, 1)).exclude(
             published__gte=datetime.date(int(year)+1, 1, 1)
@@ -55,7 +55,7 @@ def month_archive(request, year, month, page=1):
     selected_posts = BlogPost.objects.filter(
         published__gte=datetime.date(int(year), int(month), 1)).exclude(
             published__gte=datetime.date(int(year), int(month)+1, 1)
-        ).order_by('published')[5*(int(page)-1):5*int(page)]
+        ).order_by('-published')[5*(int(page)-1):5*int(page)]
     post_count = BlogPost.objects.filter(
         published__gte=datetime.date(int(year), int(month), 1)).exclude(
             published__gte=datetime.date(int(year), int(month)+1, 1)
