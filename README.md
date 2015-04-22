@@ -1,4 +1,4 @@
-Yet another python blog software - ypybs
+Yet another python blog software - yapybs
 ========================================
 Required for running this application
 -------------------------------------
