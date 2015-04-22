@@ -25,6 +25,10 @@ class BlogPost(models.Model):
     def __str__(self):
         return self.topic
 
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('blog.views.detail', args=[str(self.id)])
+
     class Meta(object):
         """meta information for blog post class"""
         ordering = ('published',)

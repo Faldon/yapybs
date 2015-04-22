@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <rss version="2.0">
+        <channel>
+            <title>{{ brand_text }}</title>
+            <link>{{ request.META.SERVER_NAME }}</link>
+            <description>{{ site_title }}</description>
+            <language>"en-en"</language>
+            <pubDate>{{ current_date|date:'SHORT_DATE_FORMAT' }}</pubDate>
+            {% if posts %}
+                {% for post in posts %}
+                <item>
+                    <title>{{ post.topic }}</title>
+                    <description>{{ post.content }}</description>
+                    <link>{{ request.scheme }}://{{ request.META.HTTP_HOST }}{{ post.get_absolute_url }}</link>
+                    <guid>{{ request.scheme }}://{{ request.META.HTTP_HOST }}{{ post.get_absolute_url }}</guid>
+                    <author>{{ post.author }}, {{post.author.email }}</author>
+                    <pubDate>{{ post.published|date:'r' }}</pubDate>
+                </item>
+                {% endfor %}
+            {% else %}
+            {% endif %}
+        </channel>
+    </rss>

@@ -105,3 +105,8 @@ def detail(request, post_id):
     post = BlogPost.objects.get(pk=post_id)
 
     return render(request, 'blog/post.html', dict(post=post))
+
+
+def rss(request):
+    posts = BlogPost.objects.order_by('-published')[:15]
+    return render(request, 'blog/rss.xml', dict(posts=posts), content_type='text/xml')
