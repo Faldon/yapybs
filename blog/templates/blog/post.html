@@ -16,12 +16,8 @@
   </div>
 </div>
 {% endblock %}
-{% block footer %}
-<nav>
-  <ul class="pagination">
-    <li>
-        <a class="btn" href="{{ request.META.HTTP_REFERER }}">{% trans "Back" %}</a>
-    </li>
-  </ul>
-</nav>
+{% block pagination %}
+  <li>
+      <a class="btn" href="{{ request.META.HTTP_REFERER }}">{% trans "Back" %}</a>
+  </li>
 {% endblock %}

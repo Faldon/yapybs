@@ -108,5 +108,10 @@ def detail(request, post_id):
 
 
 def rss(request):
+    """ RSS feed view
+    :param request: HTTP Request
+    :return: HTTP Response
+    """
     posts = BlogPost.objects.order_by('-published')[:15]
+
     return render(request, 'blog/rss.xml', dict(posts=posts), content_type='text/xml')

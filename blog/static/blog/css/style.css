@@ -1,5 +1,10 @@
-html, body {
-  height: 100%;
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
 }
 
 .postinfo {
@@ -7,15 +12,15 @@ html, body {
   top: -20px
 }
 
-#wrap {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  margin: 0 auto -80px;
+#footer {
+ position: absolute;
+ bottom: 0;
+ width: 100%;
+ height: 60px;
 }
 
-#footer {
- height: 60px;
+#footer-nav {
+  min-height: 50px;
 }
 
 #pagination nav {
@@ -33,7 +38,7 @@ html, body {
 
 #copyright {
   position: relative;
-  top: 33px;
+  top: 13px;
   right: 10px;
 }
 
