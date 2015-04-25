@@ -87,7 +87,7 @@ def day_archive(request, year, month, day):
         selected_posts = BlogPost.objects.filter(
             published__gte=datetime.date(int(year), int(month), int(day))).exclude(
                 published__gte=datetime.date(int(year), int(month), int(day)+1)
-            )
+            ).order_by('-published')
 
         return render(request, 'blog/day_archive.html', dict(
             selected_posts=selected_posts,
