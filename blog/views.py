@@ -119,6 +119,10 @@ def rss(request):
 
 
 def search(request):
+    """ Search view
+    :param HTTP Request:
+    :return: HTTP Response
+    """
     selected_posts = BlogPost.objects.filter(
         Q(tags__name__iexact=request.POST['search']) | Q(topic__icontains=request.POST['search'])
     )
