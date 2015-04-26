@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.db.models import Q
 from .models import BlogPost
 from .forms import DatepickerForm
 import datetime
@@ -115,3 +116,14 @@ def rss(request):
     posts = BlogPost.objects.order_by('-published')[:15]
 
     return render(request, 'blog/rss.xml', dict(posts=posts), content_type='text/xml')
+
+
+def search(request):
+    selected_posts = BlogPost.objects.filter(
+        Q(tags__name__iexact=request.POST['search']) | Q(topic__icontains=request.POST['search'])
+    )
+
+    return render(request, 'blog/search.html', dict(
+        selected_posts=selected_posts,
+        keywords=request.POST['search'])
+    )

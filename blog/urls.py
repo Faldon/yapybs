@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     url(r'rss$', views.rss, name='rss'),
+    url(r'search$', views.search, name='search'),
     url(r'post/(?P<post_id>\d+)$', views.detail, name='detail'),
     url(r'post/(?P<post_id>\d+)/$', views.detail, name='detail'),
     url(r'archive/(?P<year>\d{4})/(?P<month>\d{1,2})/(?P<day>\d{1,2})$', views.day_archive, name='day_archive'),

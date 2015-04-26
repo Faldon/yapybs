@@ -1,0 +1,36 @@
+{% extends "blog/default.html" %}
+{% load i18n %}
+
+{% block content %}
+{% if selected_posts %}
+    {% for post in selected_posts %}
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{ post.topic }}
+          {% for tag in post.tags.all %}
+          <span class="badge">{{ tag }}</span>
+          {% endfor %}
+        </h3>
+        <div class="postinfo">
+          <div class="pull-right">{{ post.published|date:'SHORT_DATE_FORMAT' }} - {{ post.author }}</div>
+        </div>
+      </div>
+      <div class="panel-body">
+        {% autoescape off %}
+        {{ post.content|truncatechars_html:125 }}
+        {% endautoescape %}
+        {% if post.content|length > 125 %}
+        <p></p>
+        <a class="pull-right" href="{% url 'detail' post_id=post.id %}">{% trans "Read more..." %}</a>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="alert alert-warning" role="alert">
+    {% blocktrans %}No blog posts found for '{{ keywords }}'.{% endblocktrans %}
+    </div>
+{% endif %}
+{% endblock %}
+{% block pagination %}
+{% endblock %}
