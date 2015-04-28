@@ -7,3 +7,12 @@ jQuery(document).ready(function() {
         $('input[type=date]').datepicker();
     }
 });
+
+function backToSearch(e) {
+    if(!e)
+    {
+        var e = window.event;
+    }
+    e.preventDefault();
+    window.history.back();
+}
