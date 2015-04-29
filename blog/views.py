@@ -53,19 +53,37 @@ def month_archive(request, year, month, page=1):
     :param page: Page number to view
     :return: HTTP Response
     """
+    # Get first of current month
+    current_month = datetime.date(int(year), int(month), 1)
+
+    # Get first of previous month
+    previous_month = current_month - datetime.timedelta(days=1)
+    previous_month.replace(day=1)
+
+    # Get first of next month
+    next_month = current_month + datetime.timedelta(days=31)
+    next_month.replace(day=1)
+
+    # Get posts published in the current month
     selected_posts = BlogPost.objects.filter(
-        published__gte=datetime.date(int(year), int(month), 1)).exclude(
-            published__gte=datetime.date(int(year), int(month)+1, 1)
+        published__gte=current_month
+        ).exclude(
+            published__gte=next_month
         ).order_by('-published')[5*(int(page)-1):5*int(page)]
+
+    # Count number of posts in the current month
     post_count = BlogPost.objects.filter(
-        published__gte=datetime.date(int(year), int(month), 1)).exclude(
-            published__gte=datetime.date(int(year), int(month)+1, 1)
+        published__gte=current_month
+        ).exclude(
+            published__gte=next_month
         ).count()
 
     return render(request, 'blog/month_archive.html', dict(
         selected_posts=selected_posts,
         current_page=int(page),
-        selected=datetime.date(int(year), int(month), 1),
+        selected=current_month,
+        previous_month=previous_month,
+        next_month=next_month,
         page_count=range(0, int(round(post_count/5)+1)))
     )
 

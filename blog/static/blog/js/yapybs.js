@@ -8,11 +8,11 @@ jQuery(document).ready(function() {
     }
 });
 
-function backToSearch(e) {
-    if(!e)
+function backToSearch(event) {
+    if(!event)
     {
-        var e = window.event;
+        var event = window.event;
     }
-    e.preventDefault();
+    event.preventDefault(event);
     window.history.back();
 }

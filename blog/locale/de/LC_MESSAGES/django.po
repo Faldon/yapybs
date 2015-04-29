@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-16 20:08+0200\n"
+"POT-Creation-Date: 2015-04-29 20:12+0200\n"
 "PO-Revision-Date: 2015-04-16 20:10+0200\n"
 "Last-Translator: Thomas Pulzer <t.pulzer@thesecretgamer.de>\n"
 "Language: German\n"
@@ -21,15 +21,16 @@ msgstr ""
 msgid "Pick a date:"
 msgstr "Datum auswählen:"
 
-#: templates/blog/day_archive.html:12 templates/blog/default.html:47
+#: templates/blog/day_archive.html:12 templates/blog/default.html:48
 msgid "Submit"
 msgstr "Absenden"
 
-#: templates/blog/day_archive.html:32 templates/blog/index.html:20
+#: templates/blog/day_archive.html:36 templates/blog/index.html:24
+#: templates/blog/search.html:24
 msgid "Read more..."
 msgstr "Weiterlesen..."
 
-#: templates/blog/day_archive.html:39
+#: templates/blog/day_archive.html:43
 msgid "No posts available for selected day."
 msgstr "Für gewählten Tag sind keine Einträge verfügbar."
 
@@ -49,10 +50,19 @@ msgstr "Monatsarchiv"
 msgid "Day archive"
 msgstr "Tagesarchiv"
 
-#: templates/blog/index.html:27
+#: templates/blog/default.html:46
+msgid "Search"
+msgstr "Suche"
+
+#: templates/blog/index.html:31
 msgid "No blog posts available."
 msgstr "Keine Einträge verfügbar."
 
-#: templates/blog/post.html:23
+#: templates/blog/post.html:23 templates/blog/post.html.py:27
 msgid "Back"
 msgstr "Zurück"
+
+#: templates/blog/search.html:31
+#, python-format
+msgid "No blog posts found for '%(keywords)s'."
+msgstr "Keine Blog posts zu '%(keywords)s' gefunden."

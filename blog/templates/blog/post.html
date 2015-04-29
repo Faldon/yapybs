@@ -20,7 +20,7 @@
 {% url 'search' as search %}
 {% if search in request.META.HTTP_REFERER %}
   <li>
-      <a class="btn" href="{{ request.META.HTTP_REFERER }}" onClick="backToSearch();">{% trans "Back" %}</a>
+      <a class="btn" href="{{ request.META.HTTP_REFERER }}" onClick="backToSearch(event);">{% trans "Back" %}</a>
   </li>
 {% else %}
   <li>

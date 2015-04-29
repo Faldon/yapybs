@@ -2,7 +2,8 @@
 {% load staticfiles %}
 {% load i18n %}
 <html>
-<head lang="en">
+{% get_current_language as LANGUAGE_CODE %}
+<head lang="{{ LANGUAGE_CODE }}">
     <meta charset="UTF-8">
     <title>{% block title %}{{ site_title }}{% endblock %}</title>
     {% block stylesheets %}
@@ -42,7 +43,7 @@
           <form class="navbar-form navbar-right" role="search" action="{% url 'search' %}" method="POST">
             {% csrf_token %}
             <div class="form-group">
-              <input type="text" class="form-control" name="search" placeholder="Search">
+              <input type="text" class="form-control" name="search" placeholder="{% trans 'Search' %}">
             </div>
             <button type="submit" class="btn btn-default">{% trans "Submit" %}</button>
           </form>
