@@ -3,6 +3,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
+    url(r'rss$', views.rss, name='rss'),
     url(r'rss/$', views.rss, name='rss'),
     url(r'search/$', views.search, name='search'),
     url(r'post/(?P<post_id>\d+)/$', views.detail, name='detail'),

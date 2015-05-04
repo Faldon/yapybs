@@ -27,7 +27,8 @@ def index(request, page='1'):
     return render(request, 'blog/index.html', dict(
         selected_posts=selected_posts,
         current_page=int(page),
-        page_count=range(0, int(round(post_count / 5) + 1)))
+        page_count=range(0, (post_count/5)+(post_count % 5)*1)
+        )
     )
 
 
@@ -61,7 +62,8 @@ def year_archive(request, year, page='1'):
         selected_posts=selected_posts,
         current_page=int(page),
         selected=datetime.date(int(year), 1, 1),
-        page_count=range(0, int(round(post_count / 5) + 1)))
+        page_count=range(0, (post_count/5)+(post_count % 5)*1)
+        )
     )
 
 
@@ -114,7 +116,8 @@ def month_archive(request, year, month, page='1'):
         selected=current_month,
         previous_month=previous_month,
         next_month=next_month,
-        page_count=range(0, int(round(post_count / 5) + 1)))
+        page_count=range(0, (post_count/5)+(post_count % 5)*1)
+        )
     )
 
 
