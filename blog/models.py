@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 class Tag(models.Model):
     """ tag data model
+
     The model information for a tag
     """
     name = models.CharField(max_length=32)
@@ -18,6 +19,7 @@ class Tag(models.Model):
 
 class BlogPost(models.Model):
     """ blog post data model
+
     The model inforation for a blog post
     """
     topic = models.CharField(max_length=255)

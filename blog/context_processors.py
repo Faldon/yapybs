@@ -4,6 +4,7 @@ from django.conf import settings
 
 def current_date(request):
     """ Returns the current date for using in templates
+
     :type request: django.http.HttpRequest
     :param request: The http request sent from the client
     :return: The current date as value to key current_date
@@ -14,6 +15,7 @@ def current_date(request):
 
 def brand_text(request):
     """ Returns the brand text provided in settings for using in templates
+
     :type request: django.http.HttpRequest
     :param request: The http request sent from the client
     :return: The BRAND_TEXT from settings as value to key brand_text
@@ -24,6 +26,7 @@ def brand_text(request):
 
 def site_title(request):
     """ Returns the site title provided in settings for using in templates
+
     :type request: django.http.HttpRequest
     :param request: The http request sent from the client
     :return: The SITE_TITLE from settings as value to key sute_title
