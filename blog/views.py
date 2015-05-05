@@ -24,10 +24,15 @@ def index(request, page='1'):
     # Count total number of posts
     post_count = BlogPost.objects.count()
 
+    if post_count % 5 == 0:
+        page_count = range(0, post_count//5)
+    else:
+        page_count = range(0, (post_count//5)+1)
+
     return render(request, 'blog/index.html', dict(
         selected_posts=selected_posts,
         current_page=int(page),
-        page_count=range(0, (post_count/5)+(post_count % 5)*1)
+        page_count=page_count
         )
     )
 
@@ -58,11 +63,16 @@ def year_archive(request, year, page='1'):
         published__gte=datetime.date(int(year) + 1, 1, 1)
     ).count()
 
+    if post_count % 5 == 0:
+        page_count = range(0, post_count//5)
+    else:
+        page_count = range(0, (post_count//5)+1)
+
     return render(request, 'blog/year_archive.html', dict(
         selected_posts=selected_posts,
         current_page=int(page),
         selected=datetime.date(int(year), 1, 1),
-        page_count=range(0, (post_count/5)+(post_count % 5)*1)
+        page_count=page_count
         )
     )
 
@@ -110,13 +120,18 @@ def month_archive(request, year, month, page='1'):
         published__gte=next_month
     ).count()
 
+    if post_count % 5 == 0:
+        page_count = range(0, post_count//5)
+    else:
+        page_count = range(0, (post_count//5)+1)
+
     return render(request, 'blog/month_archive.html', dict(
         selected_posts=selected_posts,
         current_page=int(page),
         selected=current_month,
         previous_month=previous_month,
         next_month=next_month,
-        page_count=range(0, (post_count/5)+(post_count % 5)*1)
+        page_count=page_count
         )
     )
 
