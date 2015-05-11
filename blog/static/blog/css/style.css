@@ -7,9 +7,8 @@ body {
   margin-bottom: 60px;
 }
 
-.postinfo {
-  position: relative;
-  top: -20px
+#tags {
+  display: inline;
 }
 
 #footer {
@@ -40,4 +39,17 @@ body {
   position: relative;
   top: 13px;
   right: 10px;
+}
+
+@media (max-width: 767px) {
+  .panel-title {
+    max-width: 70%;
+    min-height: 2em;
+  }
+  #tags {
+    display: block;
+  }
+  .postinfo {
+    max-width: 30%;
+  }
 }

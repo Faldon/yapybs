@@ -3,31 +3,31 @@
 
 {% block subnavigation %}
 <nav class="navbar">
-<form class="navbar-form navbar-left" method="POST">
-  {% csrf_token %}
-  <div class="form-group">
-    <label for="id_dateselector">{% trans 'Pick a date:' %}</label>
-    <input type="date" id="id_dateselector" name="dateselector" class="form-control">
-  </div>
-  <button type="submit" class="btn btn-default">{% trans "Submit" %}</button>
-</form>
-    </nav>
+    <form class="navbar-form navbar-left" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_dateselector">{% trans 'Pick a date:' %}</label>
+            <input type="date" id="id_dateselector" name="dateselector" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-default">{% trans "Submit" %}</button>
+    </form>
+</nav>
 {% endblock %}
 {% block content %}
 {% if selected_posts %}
-    {% for post in selected_posts %}
-    <div class="panel panel-info">
-      <div class="panel-heading">
+{% for post in selected_posts %}
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <div class="postinfo pull-right">{{ post.published|date:'SHORT_DATE_FORMAT' }} - {{ post.author }}</div>
         <h3 class="panel-title">{{ post.topic }}
-          {% for tag in post.tags.all %}
-          <span class="badge">{{ tag }}</span>
-          {% endfor %}
+            <div id="tags">
+                {% for tag in post.tags.all %}
+                <span class="badge">{{ tag }}</span>
+                {% endfor %}
+            </div>
         </h3>
-        <div class="postinfo">
-          <div class="pull-right">{{ post.published|date:'SHORT_DATE_FORMAT' }} - {{ post.author }}</div>
-        </div>
-      </div>
-      <div class="panel-body">
+    </div>
+    <div class="panel-body">
         {% autoescape off %}
         {{ post.content|truncatechars_html:125 }}
         {% endautoescape %}
@@ -35,13 +35,13 @@
         <p></p>
         <a class="pull-right" href="{% url 'detail' post_id=post.id %}">{% trans "Read more..." %}</a>
         {% endif %}
-      </div>
     </div>
-    {% endfor %}
+</div>
+{% endfor %}
 {% else %}
-    <div class="alert alert-warning" role="alert">
+<div class="alert alert-warning" role="alert">
     {% blocktrans %}No posts available for selected day.{% endblocktrans %}
-    </div>
+</div>
 {% endif %}
 {% endblock %}
 {% block pagination %}

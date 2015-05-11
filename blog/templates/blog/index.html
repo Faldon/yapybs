@@ -3,19 +3,19 @@
 
 {% block content %}
 {% if selected_posts %}
-    {% for post in selected_posts %}
-    <div class="panel panel-info">
-      <div class="panel-heading">
+{% for post in selected_posts %}
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <div class="postinfo pull-right">{{ post.published|date:'SHORT_DATE_FORMAT' }} - {{ post.author }}</div>
         <h3 class="panel-title">{{ post.topic }}
-          {% for tag in post.tags.all %}
-          <span class="badge">{{ tag }}</span>
-          {% endfor %}
+            <div id="tags">
+                {% for tag in post.tags.all %}
+                <span class="badge">{{ tag }}</span>
+                {% endfor %}
+            </div>
         </h3>
-        <div class="postinfo">
-          <div class="pull-right">{{ post.published|date:'SHORT_DATE_FORMAT' }} - {{ post.author }}</div>
-        </div>
-      </div>
-      <div class="panel-body">
+    </div>
+    <div class="panel-body">
         {% autoescape off %}
         {{ post.content|truncatechars_html:125 }}
         {% endautoescape %}
@@ -23,37 +23,37 @@
         <p></p>
         <a class="pull-right" href="{% url 'detail' post_id=post.id %}">{% trans "Read more..." %}</a>
         {% endif %}
-      </div>
     </div>
-    {% endfor %}
+</div>
+{% endfor %}
 {% else %}
-    <div class="alert alert-warning" role="alert">
+<div class="alert alert-warning" role="alert">
     {% blocktrans %}No blog posts available.{% endblocktrans %}
-    </div>
+</div>
 {% endif %}
 {% endblock %}
 {% block pagination %}
-  {% if current_page > 1 %}
-  <li>
+{% if current_page > 1 %}
+<li>
     <a href="{% url 'index' page=current_page|add:'-1' %}" aria-label="Previous">
-      <span aria-hidden="true">&laquo;</span>
+        <span aria-hidden="true">&laquo;</span>
     </a>
-  </li>
-  {% endif %}
-  {% for page in page_count %}
-  {% if current_page == page|add:'1' %}
-  <li class='active'>
-  {% else %}
-  <li>
-  {% endif %}
+</li>
+{% endif %}
+{% for page in page_count %}
+{% if current_page == page|add:'1' %}
+<li class='active'>
+    {% else %}
+<li>
+    {% endif %}
     <a href="{% url 'index' page=page|add:'1' %}">{{ page|add:'1' }}</a>
-  </li>
-  {% endfor %}
-  {% if current_page < page_count|length %}
-  <li>
+</li>
+{% endfor %}
+{% if current_page < page_count|length %}
+<li>
     <a href="{% url 'index' page=current_page|add:'1' %}" aria-label="Next">
-      <span aria-hidden="true">&raquo;</span>
+        <span aria-hidden="true">&raquo;</span>
     </a>
-  </li>
-  {% endif %}
+</li>
+{% endif %}
 {% endblock %}

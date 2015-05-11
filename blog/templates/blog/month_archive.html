@@ -3,8 +3,9 @@
 {% load l10n %}
 
 {% block subnavigation %}
-<ul class="nav nav-pills">
-  <li role="presentation" class="pull-left">
+<nav>
+<ul class="pager">
+  <li class="previous">
       <a href="{% url 'month_archive' year=previous_month|date:'Y' month=previous_month|date:'m' %}" aria-label="Previous month">
           <span aria-hidden="true">&laquo;</span>
           {% with previous_month|date:'F' as month %}
@@ -12,7 +13,7 @@
           {% endwith %}
       </a>
   </li>
-  <li role="presentation" class="pull-right">
+  <li class="next">
       <a href="{% url 'month_archive' year=next_month|date:'Y' month=next_month|date:'m' %}" aria-label="Next month">
           {% with next_month|date:'F' as month %}
            {% trans month %} {{ next_month|date:'Y' }}
@@ -21,6 +22,7 @@
       </a>
   </li>
 </ul>
+    </nav>
 {% endblock %}
 {% block pagination %}
   {% if current_page > 1 %}

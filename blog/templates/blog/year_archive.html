@@ -2,41 +2,43 @@
 {% load i18n %}
 
 {% block subnavigation %}
-<ul class="nav nav-pills">
-  <li role="presentation" class="pull-left">
-      <a href="{% url 'year_archive' year=selected|date:'Y'|add:'-1' %}" aria-label="Previous year">
-          <span aria-hidden="true">&laquo;</span> {{ selected|date:'Y'|add:'-1' }}
-      </a>
-  </li>
-  <li role="presentation" class="pull-right">
-      <a href="{% url 'year_archive' year=selected|date:'Y'|add:'1' %}" aria-label="Next year">
-          {{ selected|date:'Y'|add:'1' }} <span aria-hidden="true">&raquo;</span>
-      </a>
-  </li>
-</ul>
+<nav>
+    <ul class="pager">
+        <li class="previous">
+            <a href="{% url 'year_archive' year=selected|date:'Y'|add:'-1' %}" aria-label="Previous year">
+                <span aria-hidden="true">&laquo;</span> {{ selected|date:'Y'|add:'-1' }}
+            </a>
+        </li>
+        <li class="next">
+            <a href="{% url 'year_archive' year=selected|date:'Y'|add:'1' %}" aria-label="Next year">
+                {{ selected|date:'Y'|add:'1' }} <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
 {% endblock %}
 {% block pagination %}
-  {% if current_page > 1 %}
-  <li>
+{% if current_page > 1 %}
+<li>
     <a href="{% url 'year_archive' year=selected|date:'Y' page=current_page|add:'-1' %}" aria-label="Previous">
-      <span aria-hidden="true">&laquo;</span>
+        <span aria-hidden="true">&laquo;</span>
     </a>
-  </li>
-  {% endif %}
-  {% for page in page_count %}
-  {% if current_page == page|add:'1' %}
-  <li  class='active'>
-  {% else %}
-  <li>
-  {% endif %}
+</li>
+{% endif %}
+{% for page in page_count %}
+{% if current_page == page|add:'1' %}
+<li class='active'>
+    {% else %}
+<li>
+    {% endif %}
     <a href="{% url 'year_archive' year=selected|date:'Y' page=page|add:'1' %}">{{ page|add:'1' }}</a>
-  </li>
-  {% endfor %}
-  {% if current_page < page_count|length %}
-  <li>
+</li>
+{% endfor %}
+{% if current_page < page_count|length %}
+<li>
     <a href="{% url 'year_archive' year=selected|date:'Y' page=current_page|add:'1' %}" aria-label="Next">
-      <span aria-hidden="true">&raquo;</span>
+        <span aria-hidden="true">&raquo;</span>
     </a>
-  </li>
-  {% endif %}
+</li>
+{% endif %}
 {% endblock %}
