@@ -3,28 +3,32 @@
 
 {% block content %}
 <div class="panel panel-info">
-  <div class="panel-heading">
-    <h3 class="panel-title">{{ post.topic }}</h3>
-    <div class="postinfo">
-      <div class="pull-right">{{ post.published|date:'SHORT_DATE_FORMAT' }} - {{ post.author }}</div>
+    <div class="panel-heading">
+        <div class="postinfo pull-right">{{ post.published|date:'SHORT_DATE_FORMAT' }} - {{ post.author }}</div>
+        <h3 class="panel-title">{{ post.topic }}
+            <div id="tags">
+                {% for tag in post.tags.all %}
+                <span class="badge">{{ tag }}</span>
+                {% endfor %}
+            </div>
+        </h3>
     </div>
-  </div>
-  <div class="panel-body">
-    {% autoescape off %}
-    {{ post.content }}
-    {% endautoescape %}
-  </div>
+    <div class="panel-body">
+        {% autoescape off %}
+        {{ post.content }}
+        {% endautoescape %}
+    </div>
 </div>
 {% endblock %}
 {% block pagination %}
 {% url 'search' as search %}
 {% if search in request.META.HTTP_REFERER %}
-  <li>
-      <a class="btn" href="{{ request.META.HTTP_REFERER }}" onClick="backToSearch(event);">{% trans "Back" %}</a>
-  </li>
+<li>
+    <a class="btn" href="{{ request.META.HTTP_REFERER }}" onClick="backToSearch(event);">{% trans "Back" %}</a>
+</li>
 {% else %}
-  <li>
-      <a class="btn" href="{{ request.META.HTTP_REFERER }}">{% trans "Back" %}</a>
-  </li>
+<li>
+    <a class="btn" href="{{ request.META.HTTP_REFERER }}">{% trans "Back" %}</a>
+</li>
 {% endif %}
 {% endblock %}
