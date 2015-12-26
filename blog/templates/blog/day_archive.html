@@ -2,10 +2,11 @@
 {% load i18n %}
 
 {% block subnavigation %}
-<ul class="nav nav-pills">
+<nav>
+<ul class="pager">
     {% if lsof_prev_day %}
     {% with lsof_prev_day|first as prev_day %}
-    <li role="presentation" class="pull-left">
+    <li class="previous">
         <a href="{% url 'day_archive' year=prev_day.published|date:'Y' month=prev_day.published|date:'m' day=prev_day.published|date:'d' %}"
            aria-label="Previous day">
             <span aria-hidden="true">&laquo;</span>
@@ -16,7 +17,7 @@
     {% endif %}
     {% if fsof_next_day %}
     {% with fsof_next_day|first as next_day %}
-    <li role="presentation" class="pull-right">
+    <li class="next">
         <a href="{% url 'day_archive' year=next_day.published|date:'Y' month=next_day.published|date:'m' day=next_day.published|date:'d' %}"
            aria-label="Next month">
             {{ next_day.published|date:'SHORT_DATE_FORMAT' }}
@@ -26,6 +27,7 @@
     {% endwith %}
     {% endif %}
 </ul>
+</nav>
 {% endblock %}
 {% block content %}
 {% if selected_posts %}

@@ -3,33 +3,36 @@
 {% load l10n %}
 
 {% block subnavigation %}
-<ul class="nav nav-pills">
-    {% if lsof_prev_month %}
-    {% with lsof_prev_month|first as prev_month %}
-    <li role="presentation" class="pull-left">
-        <a href="{% url 'month_archive' year=prev_month.published|date:'Y' month=prev_month.published|date:'m' %}"
-           aria-label="Previous month">
-            <span aria-hidden="true">&laquo;</span>
-            {% with prev_month.published|date:'F' as month %}
-            {% trans month %} {{ prev_month.published|date:'Y' }}
-            {% endwith %}
-        </a>
-    </li>
-    {% endwith %}
-    {% endif %}
-    {% if fsof_next_month %}
-    {% with fsof_next_month|first as next_month %}
-    <li role="presentation" class="pull-right">
-        <a href="{% url 'month_archive' year=next_month.published|date:'Y' month=next_month.published|date:'m' %}" aria-label="Next month">
-            {% with next_month.published|date:'F' as month %}
-            {% trans month %} {{ next_month.published|date:'Y' }}
-            {% endwith %}
-            <span aria-hidden="true">&raquo;</span>
-        </a>
-    </li>
-    {% endwith %}
-    {% endif %}
-</ul>
+<nav>
+    <ul class="pager">
+        {% if lsof_prev_month %}
+        {% with lsof_prev_month|first as prev_month %}
+        <li class="previous">
+            <a href="{% url 'month_archive' year=prev_month.published|date:'Y' month=prev_month.published|date:'m' %}"
+               aria-label="Previous month">
+                <span aria-hidden="true">&laquo;</span>
+                {% with prev_month.published|date:'F' as month %}
+                {% trans month %} {{ prev_month.published|date:'Y' }}
+                {% endwith %}
+            </a>
+        </li>
+        {% endwith %}
+        {% endif %}
+        {% if fsof_next_month %}
+        {% with fsof_next_month|first as next_month %}
+        <li class="next">
+            <a href="{% url 'month_archive' year=next_month.published|date:'Y' month=next_month.published|date:'m' %}"
+               aria-label="Next month">
+                {% with next_month.published|date:'F' as month %}
+                {% trans month %} {{ next_month.published|date:'Y' }}
+                {% endwith %}
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        {% endwith %}
+        {% endif %}
+    </ul>
+</nav>
 {% endblock %}
 {% block pagination %}
 {% if current_page > 1 %}
@@ -46,7 +49,9 @@
     {% else %}
 <li>
     {% endif %}
-    <a href="{% url 'month_archive' year=selected|date:'Y' month=selected|date:'m' page=page|add:'1' %}">{{ page|add:'1' }}</a>
+    <a href="{% url 'month_archive' year=selected|date:'Y' month=selected|date:'m' page=page|add:'1' %}">
+        {{ page|add:'1' }}
+    </a>
 </li>
 {% endfor %}
 {% if current_page < page_count|length %}
