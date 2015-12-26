@@ -2,30 +2,44 @@
 {% load i18n %}
 
 {% block subnavigation %}
-<nav class="navbar">
-    <form class="navbar-form navbar-left" method="POST">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="id_dateselector">{% trans 'Pick a date:' %}</label>
-            <input type="date" id="id_dateselector" name="dateselector" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-default">{% trans "Submit" %}</button>
-    </form>
-</nav>
+<ul class="nav nav-pills">
+    {% if lsof_prev_day %}
+    {% with lsof_prev_day|first as prev_day %}
+    <li role="presentation" class="pull-left">
+        <a href="{% url 'day_archive' year=prev_day.published|date:'Y' month=prev_day.published|date:'m' day=prev_day.published|date:'d' %}"
+           aria-label="Previous day">
+            <span aria-hidden="true">&laquo;</span>
+            {{ prev_day.published|date:'SHORT_DATE_FORMAT' }}
+        </a>
+    </li>
+    {% endwith %}
+    {% endif %}
+    {% if fsof_next_day %}
+    {% with fsof_next_day|first as next_day %}
+    <li role="presentation" class="pull-right">
+        <a href="{% url 'day_archive' year=next_day.published|date:'Y' month=next_day.published|date:'m' day=next_day.published|date:'d' %}"
+           aria-label="Next month">
+            {{ next_day.published|date:'SHORT_DATE_FORMAT' }}
+            <span aria-hidden="true">&raquo;</span>
+        </a>
+    </li>
+    {% endwith %}
+    {% endif %}
+</ul>
 {% endblock %}
 {% block content %}
 {% if selected_posts %}
 {% for post in selected_posts %}
 <div class="panel panel-info">
     <div class="panel-heading">
-        <div class="postinfo pull-right">{{ post.published|date:'SHORT_DATE_FORMAT' }} - {{ post.author }}</div>
         <h3 class="panel-title">{{ post.topic }}
-            <div id="tags">
-                {% for tag in post.tags.all %}
-                <span class="badge">{{ tag }}</span>
-                {% endfor %}
-            </div>
+            {% for tag in post.tags.all %}
+            <span class="badge">{{ tag }}</span>
+            {% endfor %}
         </h3>
+        <div class="postinfo">
+            <div class="pull-right">{{ post.published|date:'SHORT_DATE_FORMAT' }} - {{ post.author }}</div>
+        </div>
     </div>
     <div class="panel-body">
         {% autoescape off %}

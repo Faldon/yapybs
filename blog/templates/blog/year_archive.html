@@ -2,20 +2,26 @@
 {% load i18n %}
 
 {% block subnavigation %}
-<nav>
-    <ul class="pager">
-        <li class="previous">
-            <a href="{% url 'year_archive' year=selected|date:'Y'|add:'-1' %}" aria-label="Previous year">
-                <span aria-hidden="true">&laquo;</span> {{ selected|date:'Y'|add:'-1' }}
-            </a>
-        </li>
-        <li class="next">
-            <a href="{% url 'year_archive' year=selected|date:'Y'|add:'1' %}" aria-label="Next year">
-                {{ selected|date:'Y'|add:'1' }} <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ul>
-</nav>
+<ul class="nav nav-pills">
+    {% if lsof_prev_year %}
+    {% with lsof_prev_year|first as prev_year %}
+    <li role="presentation" class="pull-left">
+        <a href="{% url 'year_archive' year=prev_year.published|date:'Y' %}" aria-label="Previous year">
+            <span aria-hidden="true">&laquo;</span> {{ prev_year.published|date:'Y' }}
+        </a>
+    </li>
+    {% endwith %}
+    {% endif %}
+    {% if fsof_next_year %}
+    {% with fsof_next_year|first as next_year %}
+    <li role="presentation" class="pull-right">
+        <a href="{% url 'year_archive' year=next_year.published|date:'Y' %}" aria-label="Next year">
+            {{ next_year.published|date:'Y' }} <span aria-hidden="true">&raquo;</span>
+        </a>
+    </li>
+    {% endwith %}
+    {% endif %}
+</ul>
 {% endblock %}
 {% block pagination %}
 {% if current_page > 1 %}
