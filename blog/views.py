@@ -184,7 +184,7 @@ def day_archive(request, year, month, day):
         ).order_by('-published')[:1]
 
         fsof_next_day = BlogPost.objects.filter(
-            published__gt=datetime.date(int(year), int(month), int(day))
+            published__gte=datetime.date(int(year), int(month), int(day) + 1)
         )[:1]
 
         return render(request, 'blog/day_archive.html', dict(
