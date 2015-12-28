@@ -42,7 +42,7 @@ body {
 }
 
 .postinfo>.pull-right {
-  top: -1.2em;
+  margin-top: -1.2em;
 }
 
 @media (max-width: 767px) {

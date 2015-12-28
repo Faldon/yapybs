@@ -167,33 +167,26 @@ def day_archive(request, year, month, day):
     :return: A http redirect or an html http response
     :rtype: django.http.HttpResponseRedirect or django.http.HttpResponse
     """
-    if request.method == 'POST':
-        form = DatepickerForm(request.POST)
-        if form.is_valid():
-            date_selected = form.cleaned_data['dateselector']
-            return redirect('day_archive', year=date_selected.year, month=date_selected.month, day=date_selected.day)
-    else:
-        form = DatepickerForm()
-        selected_posts = BlogPost.objects.filter(
-            published__gte=datetime.date(int(year), int(month), int(day))).exclude(
-            published__gte=datetime.date(int(year), int(month), int(day) + 1)
-        ).order_by('-published')
+    selected_posts = BlogPost.objects.filter(
+        published__gte=datetime.date(int(year), int(month), int(day))).exclude(
+        published__gte=datetime.date(int(year), int(month), int(day) + 1)
+    ).order_by('-published')
 
-        lsof_prev_day = BlogPost.objects.filter(
-            published__lt=datetime.date(int(year), int(month), int(day))
-        ).order_by('-published')[:1]
+    lsof_prev_day = BlogPost.objects.filter(
+        published__lt=datetime.date(int(year), int(month), int(day))
+    ).order_by('-published')[:1]
 
-        fsof_next_day = BlogPost.objects.filter(
-            published__gte=datetime.date(int(year), int(month), int(day) + 1)
-        )[:1]
+    fsof_next_day = BlogPost.objects.filter(
+        published__gt=datetime.date(int(year), int(month), int(day) + 1)
+    )[:1]
 
-        return render(request, 'blog/day_archive.html', dict(
-            selected_posts=selected_posts,
-            selected=datetime.date(int(year), int(month), int(day)),
-            lsof_prev_day=lsof_prev_day,
-            fsof_next_day=fsof_next_day,
-            form=form)
+    return render(request, 'blog/day_archive.html', dict(
+        selected_posts=selected_posts,
+        selected=datetime.date(int(year), int(month), int(day)),
+        lsof_prev_day=lsof_prev_day,
+        fsof_next_day=fsof_next_day
         )
+    )
 
 
 def detail(request, post_id):
