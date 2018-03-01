@@ -1,7 +1,14 @@
-try:
-    from settings import *
-except ImportError as e:
-    exit()
+### For Python 2 uncomment the following
+# try:
+#     from settings import *
+# except ImportError as e:
+#     exit()
+#
+### For Python 3 uncomment the following
+# try:
+#     from .settings import *
+# except ImportError as e:
+#     exit()
 
 SECRET_KEY = '' #IMPORTANT: Provide a unique secret key and keep it secret in production
 
