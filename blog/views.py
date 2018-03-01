@@ -63,6 +63,14 @@ def year_archive(request, year, page='1'):
         published__gte=datetime.date(int(year) + 1, 1, 1)
     ).count()
 
+    lsof_prev_year = BlogPost.objects.filter(
+        published__lt=datetime.date(int(year), 1, 1)
+    ).order_by('-published')[:1]
+
+    fsof_next_year = BlogPost.objects.filter(
+        published__gt=datetime.date(int(year), 12, 31)
+    )[:1]
+
     if post_count % 5 == 0:
         page_count = range(0, post_count//5)
     else:
@@ -72,7 +80,9 @@ def year_archive(request, year, page='1'):
         selected_posts=selected_posts,
         current_page=int(page),
         selected=datetime.date(int(year), 1, 1),
-        page_count=page_count
+        page_count=page_count,
+        lsof_prev_year=lsof_prev_year,
+        fsof_next_year=fsof_next_year
         )
     )
 
@@ -98,10 +108,6 @@ def month_archive(request, year, month, page='1'):
     # Get first of current month
     current_month = datetime.date(int(year), int(month), 1)
 
-    # Get first of previous month
-    previous_month = current_month - datetime.timedelta(days=1)
-    previous_month.replace(day=1)
-
     # Get first of next month
     next_month = current_month + datetime.timedelta(days=31)
     next_month.replace(day=1)
@@ -120,6 +126,14 @@ def month_archive(request, year, month, page='1'):
         published__gte=next_month
     ).count()
 
+    lsof_prev_month = BlogPost.objects.filter(
+        published__lt=current_month
+    ).order_by('-published')[:1]
+
+    fsof_next_month = BlogPost.objects.filter(
+        published__gte=next_month
+    )[:1]
+
     if post_count % 5 == 0:
         page_count = range(0, post_count//5)
     else:
@@ -129,9 +143,9 @@ def month_archive(request, year, month, page='1'):
         selected_posts=selected_posts,
         current_page=int(page),
         selected=current_month,
-        previous_month=previous_month,
-        next_month=next_month,
-        page_count=page_count
+        page_count=page_count,
+        lsof_prev_month=lsof_prev_month,
+        fsof_next_month=fsof_next_month
         )
     )
 
@@ -153,23 +167,26 @@ def day_archive(request, year, month, day):
     :return: A http redirect or an html http response
     :rtype: django.http.HttpResponseRedirect or django.http.HttpResponse
     """
-    if request.method == 'POST':
-        form = DatepickerForm(request.POST)
-        if form.is_valid():
-            date_selected = form.cleaned_data['dateselector']
-            return redirect('day_archive', year=date_selected.year, month=date_selected.month, day=date_selected.day)
-    else:
-        form = DatepickerForm()
-        selected_posts = BlogPost.objects.filter(
-            published__gte=datetime.date(int(year), int(month), int(day))).exclude(
-            published__gte=datetime.date(int(year), int(month), int(day) + 1)
-        ).order_by('-published')
+    selected_posts = BlogPost.objects.filter(
+        published__gte=datetime.date(int(year), int(month), int(day))).exclude(
+        published__gte=datetime.date(int(year), int(month), int(day) + 1)
+    ).order_by('-published')
 
-        return render(request, 'blog/day_archive.html', dict(
-            selected_posts=selected_posts,
-            selected=datetime.date(int(year), int(month), int(day)),
-            form=form)
+    lsof_prev_day = BlogPost.objects.filter(
+        published__lt=datetime.date(int(year), int(month), int(day))
+    ).order_by('-published')[:1]
+
+    fsof_next_day = BlogPost.objects.filter(
+        published__gt=datetime.date(int(year), int(month), int(day) + 1)
+    )[:1]
+
+    return render(request, 'blog/day_archive.html', dict(
+        selected_posts=selected_posts,
+        selected=datetime.date(int(year), int(month), int(day)),
+        lsof_prev_day=lsof_prev_day,
+        fsof_next_day=fsof_next_day
         )
+    )
 
 
 def detail(request, post_id):
