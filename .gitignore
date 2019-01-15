@@ -3,3 +3,4 @@ blog/migrations
 db.sqlite3
 doc
 yapybs/production.py
+venv
