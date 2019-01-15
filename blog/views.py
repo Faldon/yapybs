@@ -1,10 +1,9 @@
 import datetime
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.db.models import Q
 
 from .models import BlogPost
-from .forms import DatepickerForm
 
 
 def index(request, page='1'):

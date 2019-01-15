@@ -20,8 +20,9 @@ class Tag(models.Model):
 class BlogPost(models.Model):
     """ blog post data model
 
-    The model inforation for a blog post
+    The model information for a blog post
     """
+    id = models.AutoField(primary_key=True)
     topic = models.CharField(max_length=255)
     content = models.TextField()
     published = models.DateTimeField()
