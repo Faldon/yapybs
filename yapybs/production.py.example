@@ -1,10 +1,10 @@
-### For Python 2 uncomment the following
+# For Python 2 uncomment the following
 # try:
 #     from settings import *
 # except ImportError as e:
 #     exit()
 #
-### For Python 3 uncomment the following
+# For Python 3 uncomment the following
 # try:
 #     from .settings import *
 # except ImportError as e:
@@ -14,28 +14,29 @@ SECRET_KEY = '' #IMPORTANT: Provide a unique secret key and keep it secret in pr
 
 DEBUG = False
 
-SESSION_COOKIE_SECURE = False #Set to true when serving via https
-CSRF_COOKIE_SECURE = False #Set to true when serving via https
+SESSION_COOKIE_SECURE = False  # Set to true when serving via https
+CSRF_COOKIE_SECURE = False  # Set to true when serving via https
 CSRF_COOKIE_HTTPONLY = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
 
-ALLOWED_HOSTS = [''] #Enter name of your site here, e.g. www.example.com
+ALLOWED_HOSTS = ['']  # Enter name of your site here, e.g. www.example.com
 
-STATIC_ROOT = "" #Enter path to your static root folder, e.g. /var/www/html/www.example.com/static
+STATIC_ROOT = ""  # Enter path to your static root folder, e.g. /var/www/html/www.example.com/static
 
+# Configure database, see https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 DATABASES = {
         'default': {
-            'ENGINE': '', #Enter engine of your preferred database. Don't forget to install a database connector
-            'NAME': '', #Enter database name
-            'USER': '', #Enter database user
-            'PASSWORD': '', #Enter password
-            'HOST': '', #Enter database host
-            'PORT': '', #Enter port
+            'ENGINE': '',  # Enter engine of your preferred database. Don't forget to install a database connector
+            'NAME': '',  # Enter database name
+            'USER': '',  # Enter database user
+            'PASSWORD': '',  # Enter password
+            'HOST': '',  # Enter database host
+            'PORT': '',  # Enter port
         }
     }
 
-### Adjust cache and session engine to your needs
+# Adjust cache and session engine to your needs
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
@@ -45,5 +46,5 @@ CACHES = {
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 
-BRAND_TEXT = "" #Set a brand text which is displayed in the navigation bar
-SITE_TITLE = "" #Set a title for the website
+BRAND_TEXT = ""  # Set a brand text which is displayed in the navigation bar
+SITE_TITLE = ""  # Set a title for the website
