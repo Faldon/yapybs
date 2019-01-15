@@ -5,13 +5,13 @@
 <div class="panel panel-info">
     <div class="panel-heading">
         <div class="postinfo pull-right">{{ post.published|date:'SHORT_DATE_FORMAT' }} - {{ post.author }}</div>
-        <h3 class="panel-title">{{ post.topic }}
+        <div class="panel-title">{{ post.topic }}
             <div id="tags">
                 {% for tag in post.tags.all %}
                 <span class="badge">{{ tag }}</span>
                 {% endfor %}
             </div>
-        </h3>
+        </div>
     </div>
     <div class="panel-body">
         {% autoescape off %}
